@@ -45,6 +45,8 @@ public class Question
 			}
 		}
 		
+		this.reponses.add(new Reponse("Pas de réponse", false));
+		
 		//System.out.println(dispoQuestions);		
 	}
 
@@ -94,7 +96,7 @@ public class Question
 		s += "Question : " + enonce + "\n";
 		//s += "Réponses : \n";
 		
-		for(int i = 0 ; i < reponses.size() ; i++)
+		for(int i = 0 ; i < 4 ; i++)
 			s += (i + 1) + ". " + reponses.get(i) + "\n";
 		
 		

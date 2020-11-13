@@ -10,13 +10,15 @@ public class Manche
 	private ArrayList<Integer> reponsesJ1;
 	private ArrayList<Integer> reponsesJ2;
 	private Score scoreManche;
+	private Joueur prims;
 	
-	public Manche(Joueur j1, Joueur j2, String nomTheme)
+	public Manche(Joueur j1, Joueur j2, Joueur prims, String nomTheme)
 	{
 		this.theme = new Theme(nomTheme);
 		
 		this.j1 = j1;
 		this.j2 = j2;
+		this.prims = prims;
 		
 		this.reponsesJ1 = new ArrayList<Integer>();
 		this.reponsesJ2 = new ArrayList<Integer>();
@@ -132,9 +134,6 @@ public class Manche
 	public String toString() 
 	{
 		String s = "";
-
-		s += "Joueur 1 : " + j1 + "\n";
-		s += "Joueur 2 : " + j2 + "\n\n";
 		
 		s += theme + "\n";
 		
@@ -142,14 +141,17 @@ public class Manche
 		for(int i = 0 ; i < reponsesJ1.size() ; i++)
 		{
 			int r = reponsesJ1.get(i);
-			s += (r + 1) + ". " + theme.getQuestionNumero(i).getReponseNumero(r) + "\n";
+			s += (r + 1) + ". " + theme.getQuestionNumero(i).getReponseNumero(r) + "\t";
+			s += prims == j2 ? "Réponse " + j2 + " : " + (getReponsesJ2().get(i) + 1) + "\n" : "\n";
+
 		}
 		
 		s += "\nRéponse " + j2 + " : \n";
 		for(int i = 0 ; i < reponsesJ2.size() ; i++)
 		{
 			int r = reponsesJ2.get(i);
-			s += (r + 1) + ". " + theme.getQuestionNumero(i).getReponseNumero(r) + "\n";
+			s += (r + 1) + ". " + theme.getQuestionNumero(i).getReponseNumero(r) + "\t";
+			s += prims == j1 ? "Réponse " + j1 + " : " + (getReponsesJ1().get(i) + 1) + "\n" : "\n";
 		}
 		
 		s += "\nScore de la manche : " + j1 + " " + scoreManche + " " + j2 + "\n";

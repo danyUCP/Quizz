@@ -1,9 +1,7 @@
 package test;
 
 import data.Joueur;
-import data.Manche;
-import data.Question;
-import data.Theme;
+import data.Partie;
 
 public class Test 
 {
@@ -12,6 +10,22 @@ public class Test
 		Joueur rebecca = new Joueur("Rebecca");
 		Joueur laura = new Joueur("Laura");
 		
+		Partie p = new Partie();
+		
+		p.creerPartie(rebecca);		
+		p.rejoindrePartie(laura);
+		
+		p.mancheSuivante();
+		p.mancheSuivante();
+		p.mancheSuivante();
+		p.mancheSuivante();
+		p.mancheSuivante();
+
+		p.calculerScorePartie();
+
+		System.out.println(p);
+		
+		/*
 		Manche m1 = new Manche(rebecca, laura, "Test");
 		
 		Theme th1 = new Theme("Test");
@@ -44,7 +58,7 @@ public class Test
 		m1.comparerReponsesJ2(3, q3);
 		
 		System.out.println(m1);
-
+		*/
 	}
 
 }
