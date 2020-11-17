@@ -83,20 +83,6 @@ public class Partie
 	
 	public void creerManche()
 	{
-		//Joueur joueur1 = null, joueur2 = null;		
-		
-		/*
-		if(this.joueur1Actuel == j1)
-		{
-			joueur1 = j1;
-			joueur2 = j2;
-		}
-		else
-		{
-			joueur1 = j2;
-			joueur2 = j1;
-		}
-		*/
 		Manche m1 = new Manche(j1, j2, prims, "Test");
 		
 		Theme th1 = new Theme("Test");
@@ -148,6 +134,11 @@ public class Partie
 	public Manche getMancheNumero(int i)
 	{
 		return this.manches.get(i);
+	}
+	
+	public int getNbManches()
+	{
+		return this.manches.size();
 	}
 	
 

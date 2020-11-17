@@ -1,4 +1,4 @@
-package data;
+package connection;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -7,17 +7,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class SocketServeur 
+public class SocketClient
 {
-	private InetAddress ipClient;
+	private InetAddress ipServeur;
 	private int port;
-	private ServerSocket socketServeur;
-	
-	private Socket socketClient;
+	private Socket socket;
 	
 	private BufferedInputStream bis;
 	private BufferedOutputStream bos;
@@ -25,40 +22,22 @@ public class SocketServeur
 	private BufferedReader entree;
 	private PrintWriter sortie;
 	
-	public SocketServeur()
+	public SocketClient()
 	{
 		try
 		{
-			this.socketServeur = new ServerSocket(2020);
-			this.ipClient = socketServeur.getInetAddress();
-			this.port = socketServeur.getLocalPort();
+			this.socket = new Socket("127.0.0.1", 2020);
+			this.ipServeur = socket.getInetAddress();
+			this.port = socket.getPort();
 			
-			//this.bos = new BufferedOutputStream(this.socketServeur.getOutputStream());
-			//this.bis = new BufferedInputStream(this.socketServeur.getInputStream());
+			this.bos = new BufferedOutputStream(this.socket.getOutputStream());
+			this.bis = new BufferedInputStream(this.socket.getInputStream());
 			
-			this.enAttente();
+			this.entree = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+			this.sortie = new PrintWriter(this.socket.getOutputStream());
+			System.out.println("Port de communication côté client : " + socket.getLocalPort());
+			System.out.println("Nom de l'hôte distant : " + socket.getRemoteSocketAddress());
 		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public void enAttente()
-	{		
-		try
-		{
-			System.out.println("Serveur en attente sur " + InetAddress.getLocalHost() + " : " + this.socketServeur.getLocalPort());
-
-			while(true)
-			{
-				this.socketClient = socketServeur.accept();
-				System.out.println("Client " + socketClient.getInetAddress() + " connecté");
-				
-				this.entree = new BufferedReader(new InputStreamReader(this.socketClient.getInputStream()));
-				this.sortie = new PrintWriter(this.socketClient.getOutputStream());
-			}
-		}
 		catch (UnknownHostException e)
 		{
 			e.printStackTrace();
@@ -68,9 +47,6 @@ public class SocketServeur
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
 	
 	public void envoyerDonnees(String req)
 	{
@@ -93,7 +69,6 @@ public class SocketServeur
 		
 		try
 		{			
-			
 			sortie.println(requete);
 			bos.flush();
 		} 
@@ -122,6 +97,25 @@ public class SocketServeur
 		return contenu;
 	}
 	
+	public String ecouterRequete()
+	{		
+		String contenu = "";
+		int stream;
+		
+		try
+		{
+			while((stream = bis.read()) != -1)
+				contenu += (char)stream;
+			
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return contenu;
+	}
+	
 	public void deconnecter()
 	{
 		try 
@@ -129,11 +123,7 @@ public class SocketServeur
 			this.bos.close();
 			this.bis.close();
 
-			this.entree.close();
-			this.sortie.close();
-			
-			this.socketClient.close();
-			this.socketServeur.close();
+			this.socket.close();
 		} 
 		catch (IOException e) 
 		{
@@ -141,4 +131,7 @@ public class SocketServeur
 		}
 	}
 	
+
+
+
 }
