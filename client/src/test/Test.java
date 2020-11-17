@@ -11,6 +11,7 @@ public class Test
 {
 	public static void main(String[] args) 
 	{
+		// bonjour Danieeeeeel !
 		Joueur rebecca = new Joueur("Rebecca");
 		Joueur laura = new Joueur("Laura");
 		
