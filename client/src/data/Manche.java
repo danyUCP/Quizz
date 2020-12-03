@@ -11,6 +11,8 @@ public class Manche
 	private ArrayList<Integer> reponsesJ2;
 	private Score scoreManche;
 	private Joueur prims;
+	private int id;
+	private int numeroManche;
 	
 	public Manche(Joueur j1, Joueur j2, Joueur prims, String nomTheme)
 	{
@@ -24,6 +26,35 @@ public class Manche
 		this.reponsesJ2 = new ArrayList<Integer>();
 		
 		this.scoreManche = new Score(0, 0);
+	}
+	
+	public Manche(int id, Joueur j1, Joueur j2, Joueur prims, String nomTheme)
+	{
+		this.theme = new Theme(nomTheme);
+		
+		this.j1 = j1;
+		this.j2 = j2;
+		this.prims = prims;
+		
+		this.reponsesJ1 = new ArrayList<Integer>();
+		this.reponsesJ2 = new ArrayList<Integer>();
+		
+		this.scoreManche = new Score(0, 0);
+	}
+	
+	public Manche(int id, Joueur j1, Joueur j2, Joueur prims, Theme theme, int numeroManche)
+	{
+		this.theme = theme;
+		
+		this.j1 = j1;
+		this.j2 = j2;
+		this.prims = prims;
+		
+		this.reponsesJ1 = new ArrayList<Integer>();
+		this.reponsesJ2 = new ArrayList<Integer>();
+		
+		this.scoreManche = new Score(0, 0);
+		this.numeroManche = numeroManche;
 	}
 	
 	public void ajouterQuestion(Question q)
@@ -89,6 +120,16 @@ public class Manche
 		this.theme = theme;
 	}
 
+	public int getId() 
+	{
+		return id;
+	}
+
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+
 	public Joueur getJ1() 
 	{
 		return j1;
@@ -141,7 +182,7 @@ public class Manche
 		for(int i = 0 ; i < reponsesJ1.size() ; i++)
 		{
 			int r = reponsesJ1.get(i);
-			s += (r + 1) + ". " + theme.getQuestionNumero(i).getReponseNumero(r) + "\t";
+			s += r + ". " + theme.getQuestionNumero(i).getReponseTag(r) + "\t";
 			s += prims == j2 ? "Réponse " + j2 + " : " + (getReponsesJ2().get(i) + 1) + "\n" : "\n";
 
 		}
@@ -150,7 +191,7 @@ public class Manche
 		for(int i = 0 ; i < reponsesJ2.size() ; i++)
 		{
 			int r = reponsesJ2.get(i);
-			s += (r + 1) + ". " + theme.getQuestionNumero(i).getReponseNumero(r) + "\t";
+			s += r + ". " + theme.getQuestionNumero(i).getReponseTag(r) + "\t";
 			s += prims == j1 ? "Réponse " + j1 + " : " + (getReponsesJ1().get(i) + 1) + "\n" : "\n";
 		}
 		

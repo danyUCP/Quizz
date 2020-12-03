@@ -11,12 +11,25 @@ public class Partie
 	private Boolean enAttente;
 	private int mancheActuelle;
 	private Joueur prims;
+	private int id;
 	
 	
 	public Partie() 
 	{
 		this.manches = new ArrayList<Manche>();
 		this.scorePartie = new Score(0, 0);
+		this.enAttente = true;
+	}
+	
+	public Partie(int id, Joueur j1, Joueur j2, Score scorePartie, int mancheActuelle) 
+	{
+		this.id = id;
+		this.j1 = j1;
+		this.j2 = j2;
+		this.scorePartie = scorePartie;
+		this.mancheActuelle = mancheActuelle;
+
+		this.manches = new ArrayList<Manche>();
 		this.enAttente = true;
 	}
 	
@@ -140,7 +153,16 @@ public class Partie
 	{
 		return this.manches.size();
 	}
-	
+
+	public int getId() 
+	{
+		return id;
+	}
+
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
 
 	public Joueur getJ1() 
 	{

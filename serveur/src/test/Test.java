@@ -60,6 +60,44 @@ public class Test {
 			e.printStackTrace();
 		}
 
+
+
+		/*
+		try
+		{
+
+			while(true)
+			{
+				Socket client = serveur.accept();
+				System.out.println("Client " + client.getInetAddress() + " connecté");
+
+
+				//Lecture dans le flux
+				BufferedInputStream bis = new BufferedInputStream(client.getInputStream());
+
+
+				String contenu = "";
+				int stream;
+				byte[] b = new byte[4096];
+				stream = bis.read(b);
+				contenu = new String(b, 0, stream);
+
+				System.out.println(contenu);
+
+
+				client.close();
+
+				System.out.println("Client déconnecté");
+
+			}
+
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		*/
+
 	}
 
 }

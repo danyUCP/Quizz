@@ -1,5 +1,9 @@
 package test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import connection.SocketClient;
 
 public class TestSocket 
@@ -9,66 +13,30 @@ public class TestSocket
 		
 		SocketClient socket = new SocketClient();
 		
-		socket.envoyerRequete("a");
-		System.out.println(socket.ecouter());
+		BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in)) ;
+		String instruction = null;
+		
+		do
+		{
+			try 
+			{
+				System.out.print("\nTapez instruction : ");
+				instruction = clavier.readLine();
+
+				socket.envoyerInstruction(instruction);
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}while(instruction != null);
 		
 		
 		socket.deconnecter();
 		
 		
 		
-		/*
-		Socket soc = null;
-		
-		try 
-		{
-			soc = new Socket("127.0.0.1", 2020);
 
-			System.out.println("Port de communication côté client : " + soc.getLocalPort());
-			System.out.println("Nom de l'hôte distant : " + soc.getRemoteSocketAddress());
-
-			//Ecriture dans le flux
-			String requete = "Commande depuis le client\r\n";
-			
-			BufferedOutputStream bos = new BufferedOutputStream(soc.getOutputStream());
-			bos.write(requete.getBytes());
-			bos.flush();
-			
-			bos.write(("" + soc.getLocalPort()).getBytes());
-			bos.flush();
-			//Lecture dans le flux
-			BufferedInputStream bis = new BufferedInputStream(soc.getInputStream());
-			
-			String contenu = "";
-			int stream;
-			while((stream = bis.read()) != -1)
-			{
-				contenu += (char)stream;
-			}
-			
-			System.out.println(contenu);
-		} 
-		catch (UnknownHostException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try 
-			{
-				soc.close();
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
-		}
-
-		*/
 
 	}
 

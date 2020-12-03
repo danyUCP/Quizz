@@ -4,12 +4,20 @@ import java.util.ArrayList;
 
 public class Theme 
 {
+	private int id;
 	private String nom;
 	private ArrayList<Question> questions;
 	
 	
 	public Theme(String nom) 
 	{
+		this.nom = nom;
+		this.questions = new ArrayList<Question>();
+	}
+	
+	public Theme(int id, String nom) 
+	{
+		this.id = id;
 		this.nom = nom;
 		this.questions = new ArrayList<Question>();
 	}
@@ -30,7 +38,26 @@ public class Theme
 		return this.questions.get(i);
 	}
 	
-	
+	public int getId() 
+	{
+		return id;
+	}
+
+	public void setId(int id) 
+	{
+		this.id = id;
+	}
+
+	public String getNom() 
+	{
+		return nom;
+	}
+
+	public void setNom(String nom) 
+	{
+		this.nom = nom;
+	}
+
 	public String toString() 
 	{
 		String s = "";

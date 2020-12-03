@@ -8,16 +8,17 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
+
+import data.Joueur;
+import data.Question;
 
 public class SocketClient
 {
 	private InetAddress ipServeur;
 	private int port;
 	private Socket socket;
-	
-	private BufferedInputStream bis;
-	private BufferedOutputStream bos;
 	
 	private BufferedReader entree;
 	private PrintWriter sortie;
@@ -26,17 +27,16 @@ public class SocketClient
 	{
 		try
 		{
-			this.socket = new Socket("127.0.0.1", 2020);
+			this.socket = new Socket("127.0.0.1", 2021);
 			this.ipServeur = socket.getInetAddress();
 			this.port = socket.getPort();
-			
-			this.bos = new BufferedOutputStream(this.socket.getOutputStream());
-			this.bis = new BufferedInputStream(this.socket.getInputStream());
-			
+						
 			this.entree = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			this.sortie = new PrintWriter(this.socket.getOutputStream());
+			
 			System.out.println("Port de communication côté client : " + socket.getLocalPort());
 			System.out.println("Nom de l'hôte distant : " + socket.getRemoteSocketAddress());
+			
 		} 
 		catch (UnknownHostException e)
 		{
@@ -48,82 +48,71 @@ public class SocketClient
 		}
 	}
 	
-	public void envoyerDonnees(String req)
+	
+	public void envoyerRequete(String requete)
 	{
-		String requete = "Commande depuis le client\r\n";
+		String reponse = null;
 		
-		try
-		{			
-			bos.write(requete.getBytes());
-			bos.flush();
-		} 
-		catch (IOException e) 
+		do
 		{
-			e.printStackTrace();
-		}
+			try
+			{	
+				sortie.println(requete);
+				System.out.println("Envoi : " + requete);
+				sortie.flush();
+
+				reponse = entree.readLine();
+				System.out.println("Reçu : " + reponse);
+			} 
+			catch(SocketException e){
+				System.err.println("LA CONNEXION AU SERVEUR A ETE INTERROMPUE ! ");
+				break;
+			}
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}while(requete != null);
 	}
 	
-	public void envoyerRequete(String req)
+	public String envoyerInstruction(String instruction)
 	{
-		String requete = "Commande depuis le client\r\n";
+
+		String reponse = null;
 		
 		try
-		{			
-			sortie.println(requete);
-			bos.flush();
+		{
+			sortie.println(instruction);
+			System.out.println("\nEnvoi : " + instruction);
+			sortie.flush();
+
+			reponse = entree.readLine();
+			System.out.println("Reçu : " + reponse);
 		} 
+		catch(SocketException e){
+			System.err.println("LA CONNEXION AU SERVEUR A ETE INTERROMPUE ! ");
+			reponse = "ERREUR:La connexion au serveur a été interrompue !";
+		}
 		catch (IOException e) 
 		{
 			e.printStackTrace();
 		}
+		
+		return reponse;
 	}
 	
-	public String ecouter()
-	{		
-		String contenu = "";
-		int stream;
-		
-		try
-		{
-			while((stream = bis.read()) != -1)
-				contenu += (char)stream;
-			
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		
-		return contenu;
-	}
 	
-	public String ecouterRequete()
-	{		
-		String contenu = "";
-		int stream;
-		
-		try
-		{
-			while((stream = bis.read()) != -1)
-				contenu += (char)stream;
-			
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		
-		return contenu;
-	}
+	
 	
 	public void deconnecter()
 	{
 		try 
 		{
-			this.bos.close();
-			this.bis.close();
+			this.entree.close();
+			this.sortie.close();
 
 			this.socket.close();
+			System.out.println("Client déconnecté");
 		} 
 		catch (IOException e) 
 		{
