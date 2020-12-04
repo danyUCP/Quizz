@@ -38,6 +38,7 @@ public class RequeteManager
 		listeInstructions.add("3ThemesAlea");
 		listeInstructions.add("infoParties");
 		listeInstructions.add("infoManches");
+		listeInstructions.add("adversaireAlea");
 		listeInstructions.add("3QuestionsAlea");
 		listeInstructions.add("newPartie");
 		listeInstructions.add("newManche");
@@ -219,6 +220,10 @@ public class RequeteManager
 						case "infoManches":				
 							System.out.println("Informations sur les manches de la partie n°" + donnees[1]);
 							reponse = BDConnexion.getInfoManches(donnees[1]);
+							break; 
+						case "adversaireAlea":				
+							System.out.println("Recherche des parties adverses");
+							reponse = BDConnexion.rechercheAdversaire(donnees[1]);
 							break; 
 						case "3QuestionsAlea":				
 							System.out.println("Génération de 3 questions aléatoires, thème n°" + donnees[1]);

@@ -17,6 +17,8 @@ import javax.swing.SwingUtilities;
 
 import connection.Client;
 import data.Joueur;
+import data.Partie;
+import data.Score;
 
 public class GamePanel extends JPanel
 {
@@ -103,7 +105,35 @@ public class GamePanel extends JPanel
 			else if(e.getSource() == continuerPartie)
 				add(new PartiePanel(joueur, client));
 			else if(e.getSource() == adversaireAlea)
-				add(new PartiePanel(joueur, client));
+			{
+				String reponse = client.envoyerInstruction("GET:adversaireAlea " + joueur.getId());
+				String donnees[] = reponse.split(":");
+				
+				if(donnees[0].equals("ERREUR"))
+				{
+					JOptionPane.showMessageDialog(null, donnees[1]);
+				}
+				else if(donnees[0].equals("OK"))
+				{
+					String donneesParties[] = donnees[1].split(";");
+
+					int idPartie = Integer.parseInt(donneesParties[0]);
+					Joueur j1 = new Joueur(donneesParties[1]);
+					Joueur j2 = new Joueur(donneesParties[2]);
+					Score scorePartie = new Score(Integer.parseInt(donneesParties[3]), Integer.parseInt(donneesParties[4]));
+					int mancheActuelle = Integer.parseInt(donneesParties[5]);
+					
+					if(j1.getPseudo().equals(""))
+						j1.setPseudo("Pas d'adversaire");
+					if(j2.getPseudo().equals(""))
+						j2.setPseudo("Pas d'adversaire");
+						
+					Partie p = new Partie(idPartie, j1, j2, scorePartie, mancheActuelle);
+					
+					
+					add(new ManchePanel(joueur, client, p));
+				}
+			}
 			
 
 			revalidate();

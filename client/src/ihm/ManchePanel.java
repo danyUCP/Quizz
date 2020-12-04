@@ -154,7 +154,7 @@ public class ManchePanel extends JPanel
 
 			this.manche = manche;
 			this.setSize(300, 40);
-			this.setText("Manche " + manche.getNumeroManche() + " : " + manche.getTheme().getNom() + "         " + manche.getScoreManche());
+			this.setText("<html><p style='text-align: center;'>Manche " + manche.getNumeroManche() + " : " + manche.getTheme().getNom() + "<br /> " + partie.getJ1() + " " + manche.getScoreManche() + " " + partie.getJ2() + "</p></html>");
 
 		}
 

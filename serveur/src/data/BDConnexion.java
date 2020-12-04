@@ -356,6 +356,80 @@ public class BDConnexion
 		return s;
 	}
 	
+	public static String rechercheAdversaire(String idJoueur)
+	{
+		String s = "";
+
+		try
+		{
+			Statement st = connexion.createStatement();
+
+			String requete = "";
+			requete += "SELECT id_partie FROM participer ";
+			requete += "NATURAL JOIN partie ";
+			requete += "WHERE id_joueur != " + idJoueur + " AND pleine = false ";
+			requete += "ORDER BY derniere_modif ASC ";
+
+			ResultSet rs = st.executeQuery(requete);
+			ResultSetMetaData rm = rs.getMetaData();
+
+			System.out.println(requete);
+			
+			rs.next();
+			int idPartie = rs.getInt(1);
+			
+			
+			requete = "";
+			requete += "INSERT INTO participer ";
+			requete += "VALUES (" + idJoueur + "," + idPartie + ",false) ";
+			requete += "RETURNING * ";
+			
+			rs = st.executeQuery(requete);
+			System.out.println(requete);
+
+			
+			requete = "";
+			requete += "UPDATE partie ";
+			requete += "SET pleine = true, nom_j2 = (SELECT nom_joueur FROM joueur WHERE id_compte = " + idJoueur + "), derniere_modif = now() ";
+			requete += "WHERE id_partie = " + idPartie + " ";
+			requete += "RETURNING id_partie,nom_j1,nom_j2,score_j1,score_j2,manche_actuelle ";
+			
+			rs = st.executeQuery(requete);
+			rm = rs.getMetaData();
+			System.out.println(requete);
+			
+			rs.next();
+			
+			for(int i = 1 ; i <= rm.getColumnCount() ; i++)
+			{
+				s += (i != 1 ? ";" : "");
+
+				if(rs.getObject(i) != null)
+					s += rs.getObject(i).toString();
+				else
+					s += "";
+			}
+
+
+
+
+			rs.close();
+			st.close();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+
+			return "ERREUR:Requête PSQL incorrecte";
+		}
+		
+		if(s.isEmpty())
+			s = "ERREUR:Aucune partie en cours";
+		else
+			s = "OK:" + s;
+		
+		return s;
+	}
 	
 	public static String creerPartie(String idJoueur)
 	{
