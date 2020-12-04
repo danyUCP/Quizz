@@ -59,13 +59,11 @@ public class ManchePanel extends JPanel
 		//-------------- PARTIE CONTENU --------------------//
 		contenu = new JPanel();
 		contenu.setBackground(new Color(28, 28, 28));
-		//contenu.setPreferredSize(new Dimension(largeur, hauteur - 40));
 		initContenu();
 		
 		//-------------- PARTIE SCROLL --------------------//
 		scroll = new JScrollPane(contenu);
 		scroll.setBackground(new Color(28, 28, 28));
-		//scroll.setPreferredSize(new Dimension(largeur, hauteur - 40));
 		scroll.setMaximumSize(new Dimension(largeur, hauteur - 40));
 		this.add(scroll, BorderLayout.CENTER);
 		
@@ -128,20 +126,6 @@ public class ManchePanel extends JPanel
 			this.revalidate();
 
 		}
-		/*
-		nouvellePartie = new BoutonGame("Nouvelle Partie");
-		continuerPartie = new BoutonGame("Continuer Partie");
-		adversaireAlea = new BoutonGame("Adversaire Aléatoire");
-				
-		contenu.add(nouvellePartie);
-		contenu.add(continuerPartie);
-		contenu.add(adversaireAlea);	
-		
-		nouvellePartie.addActionListener(new MenuListener());
-		continuerPartie.addActionListener(new MenuListener());
-		adversaireAlea.addActionListener(new MenuListener());
-		*/
-		
 	}
 	
 	private class LabelManche extends LabelGame
@@ -154,7 +138,8 @@ public class ManchePanel extends JPanel
 
 			this.manche = manche;
 			this.setSize(300, 40);
-			this.setText("<html><p style='text-align: center;'>Manche " + manche.getNumeroManche() + " : " + manche.getTheme().getNom() + "<br /> " + partie.getJ1() + " " + manche.getScoreManche() + " " + partie.getJ2() + "</p></html>");
+			this.setText("<html><p style='text-align: center;'>Manche " + manche.getNumeroManche() + " : " + manche.getTheme().getNom() + "<br />"
+					+ partie.getJ1() + " " + manche.getScoreManche() + " " + partie.getJ2() + "</p></html>");
 
 		}
 
@@ -173,14 +158,7 @@ public class ManchePanel extends JPanel
 		public void actionPerformed(ActionEvent e) 
 		{
 			removeAll();
-			/*
-			if(e.getSource() == nouvellePartie)
-				add(new PartiePanel(joueur, client));
-			else if(e.getSource() == continuerPartie)
-				add(new PartiePanel(joueur, client));
-			else if(e.getSource() == adversaireAlea)
-				add(new PartiePanel(joueur, client));
-			*/
+			
 
 			revalidate();
 			repaint();			
@@ -189,7 +167,6 @@ public class ManchePanel extends JPanel
 
 	public void initNavigateur()
 	{
-		//header.setLayout(new GridLayout(1, 3, 0, 3));
 		header.setLayout(new BorderLayout());
 
 		joueurLabel = new LabelGame("Bonjour " + joueur.getPseudo());
@@ -207,10 +184,7 @@ public class ManchePanel extends JPanel
 		public void actionPerformed(ActionEvent e) 
 		{
 			if(e.getSource() == retour)
-				retour();
-				
-			//contenu.revalidate();
-			//contenu.repaint();
+				retour();				
 		}
 	}
 	

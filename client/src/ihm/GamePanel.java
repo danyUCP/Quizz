@@ -143,7 +143,6 @@ public class GamePanel extends JPanel
 	
 	public void initNavigateur()
 	{
-		//header.setLayout(new GridLayout(1, 3, 0, 3));
 		header.setLayout(new BorderLayout());
 
 		joueurLabel = new LabelGame("Bonjour " + joueur.getPseudo());
@@ -162,9 +161,6 @@ public class GamePanel extends JPanel
 		{
 			if(e.getSource() == deconnecter)
 				fermer();
-			
-			//contenu.revalidate();
-			//contenu.repaint();
 		}
 	}
 	

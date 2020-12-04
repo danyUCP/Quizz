@@ -109,6 +109,7 @@ public class Client
 			System.err.println("LA CONNEXION AU SERVEUR A ETE INTERROMPUE ! ");
 			reponse = "ERREUR:La connexion au serveur a été interrompue !";
 			deconnecter();
+			
 		}
 		catch (IOException e) 
 		{

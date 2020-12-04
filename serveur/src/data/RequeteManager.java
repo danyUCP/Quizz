@@ -147,11 +147,7 @@ public class RequeteManager
 			System.out.println("Pseudo : " + pseudo);
 			System.out.println("Mot de passe : " + mdp);
 			
-			String requete = "";
-			requete += "INSERT INTO compte (nom_joueur, mdp) ";
-			requete += "VALUES ('" + pseudo + "','" + mdp + "') ";
-			
-			System.out.println(requete);
+			reponse = BDConnexion.creerCompte(pseudo, mdp);
 		}
 
 		return reponse;
@@ -176,7 +172,7 @@ public class RequeteManager
 			requete += "WHERE nom_joueur = '" + pseudo + "' AND mdp = '" + mdp + "' ";
 			
 			System.out.println(requete);
-			reponse = BDConnexion.selectDonnees(requete);
+			reponse = BDConnexion.connecterCompte(requete);
 		}
 
 

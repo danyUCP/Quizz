@@ -55,13 +55,11 @@ public class PartiePanel extends JPanel
 		//-------------- PARTIE CONTENU --------------------//
 		contenu = new JPanel();
 		contenu.setBackground(new Color(28, 28, 28));
-		//contenu.setPreferredSize(new Dimension(largeur, hauteur - 40));
 		initContenu();
 		
 		//-------------- PARTIE SCROLL --------------------//
 		scroll = new JScrollPane(contenu);
 		scroll.setBackground(new Color(28, 28, 28));
-		//scroll.setPreferredSize(new Dimension(largeur, hauteur - 40));
 		scroll.setMaximumSize(new Dimension(largeur, hauteur - 40));
 		this.add(scroll, BorderLayout.CENTER);
 	}
@@ -112,22 +110,7 @@ public class PartiePanel extends JPanel
 				contenu.add(parties.get(i));
 			
 			this.revalidate();
-
-		}
-		/*
-		nouvellePartie = new BoutonGame("Nouvelle Partie");
-		continuerPartie = new BoutonGame("Continuer Partie");
-		adversaireAlea = new BoutonGame("Adversaire Aléatoire");
-				
-		contenu.add(nouvellePartie);
-		contenu.add(continuerPartie);
-		contenu.add(adversaireAlea);	
-		
-		nouvellePartie.addActionListener(new MenuListener());
-		continuerPartie.addActionListener(new MenuListener());
-		adversaireAlea.addActionListener(new MenuListener());
-		*/
-		
+		}		
 	}
 	
 	private class BoutonPartie extends BoutonGame
@@ -155,7 +138,6 @@ public class PartiePanel extends JPanel
 	
 	private class PartieListener implements ActionListener
 	{
-
 		public void actionPerformed(ActionEvent e) 
 		{
 			Partie partieChoisie = ((BoutonPartie)(e.getSource())).getPartie();
@@ -163,58 +145,11 @@ public class PartiePanel extends JPanel
 			removeAll();
 			add(new ManchePanel(joueur, client, partieChoisie));
 			revalidate();
-			/*
-			String reponse = client.envoyerInstruction("GET:3QuestionsAlea " + themeChoisi.getId());
-			//JOptionPane.showMessageDialog(null, reponse);
-
-			String donnees[] = reponse.split(":");
-
-			if(donnees[0].equals("ERREUR"))
-			{
-				JOptionPane.showMessageDialog(null, donnees[1]);
-			}
-			else if(donnees[0].equals("OK"))
-			{
-				String donneesQ[] = donnees[1].split(";");
-
-				Question q1 = new Question(Integer.parseInt(donneesQ[0]), donneesQ[1], donneesQ[2], donneesQ[3], donneesQ[4], donneesQ[5]);
-				Question q2 = new Question(Integer.parseInt(donneesQ[6]), donneesQ[7], donneesQ[8], donneesQ[9], donneesQ[10], donneesQ[11]);
-				Question q3 = new Question(Integer.parseInt(donneesQ[12]), donneesQ[13], donneesQ[14], donneesQ[15], donneesQ[16], donneesQ[17]);
-
-				themeChoisi.ajouterQuestion(q1);
-				themeChoisi.ajouterQuestion(q2);
-				themeChoisi.ajouterQuestion(q3);
-
-				reponse = client.envoyerInstruction("SET:newManche " + idPartie + "/" + themeChoisi.getId() + "/" + q1.getId() + "/" + q2.getId() + "/" + q3.getId());
-
-				Manche m = new Manche(1, joueur, null, joueur, themeChoisi, 1);
-
-				removeAll();
-				add(new ManchePanel(joueur, client, idPartie, m));
-				revalidate();
-
-			 	*/
-				/*
-				removeAll();
-				
-			if(e.getSource() == nouvellePartie)
-				add(new PartiePanel(joueur, client));
-			else if(e.getSource() == continuerPartie)
-				add(new PartiePanel(joueur, client));
-			else if(e.getSource() == adversaireAlea)
-				add(new PartiePanel(joueur, client));
-				 
-
-				revalidate();
-				repaint();	
-				
-			}*/
 		}
 	}
 
 	public void initNavigateur()
 	{
-		//header.setLayout(new GridLayout(1, 3, 0, 3));
 		header.setLayout(new BorderLayout());
 
 		joueurLabel = new LabelGame("Bonjour " + joueur.getPseudo());
@@ -233,9 +168,6 @@ public class PartiePanel extends JPanel
 		{
 			if(e.getSource() == retour)
 				retour();
-				
-			//contenu.revalidate();
-			//contenu.repaint();
 		}
 	}
 	

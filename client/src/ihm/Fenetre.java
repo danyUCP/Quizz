@@ -205,15 +205,27 @@ public class Fenetre extends JFrame
 					global.removeAll();
 					global.add(new GamePanel(joueur, client), BorderLayout.CENTER);
 				}
-					
-				
-				
 			}
 			else if(e.getSource() == creer)
 			{
-				JOptionPane.showMessageDialog(null,
-	    		          "Créateurs : Daniel FRANCOIS, Laura FUSTINONI et Rebecca SIMON\n");
-						
+				String nomJoueur = pseudo.getText();
+				String mdpJoueur = mdp.getText();
+				
+				String reponse = client.envoyerInstruction("CREATE:" + nomJoueur + " " + mdpJoueur);
+				
+				String donnees[] = reponse.split(":");
+				
+				if(donnees[0].equals("ERREUR"))
+				{
+					JOptionPane.showMessageDialog(null, donnees[1]);
+				}
+				else if(donnees[0].equals("OK"))
+				{
+					String donneesJoueur[] = donnees[1].split(";");
+					Joueur joueur = new Joueur(Integer.parseInt(donneesJoueur[0]), donneesJoueur[1]);
+					global.removeAll();
+					global.add(new GamePanel(joueur, client), BorderLayout.CENTER);
+				}		
 			}
 
 			global.revalidate();	

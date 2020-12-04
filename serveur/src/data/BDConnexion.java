@@ -45,15 +45,6 @@ public class BDConnexion
 			ResultSet rs = st.executeQuery(req);
 			ResultSetMetaData rm = rs.getMetaData();
 
-			/*
-			while(rs.next())
-			{
-				s += rs.getString("no_invent") + "\t";
-				s += rs.getString("marque") + "\t";
-				s += rs.getString("date_achat") + "\t";
-				s += rs.getString("fournisseur") + "\n";
-			}
-			*/
 
 			while(rs.next())
 			{
@@ -69,7 +60,61 @@ public class BDConnexion
 		return s;
 	}
 	
-	public static String selectDonnees(String req)
+	public static String creerCompte(String pseudo, String mdp)
+	{
+		String s = "";
+		
+		try
+		{
+			Statement st = connexion.createStatement();
+			
+			String requete = "";
+			requete += "SELECT count(*) FROM joueur ";
+			requete += "WHERE pseudo = '"  + pseudo + "' ";
+			
+			System.out.println(requete);
+			
+			ResultSet rs = st.executeQuery(requete);
+			
+			rs.next();
+			int n = rs.getInt(1);
+			
+			if(n != 0)
+				return "ERREUR:Ce compte existe déjà !";
+			
+			requete = "";
+			requete += "INSERT INTO joueur (nom_joueur, mdp, pseudo) ";
+			requete += "VALUES ('" + pseudo + "','" + mdp + "','"  + pseudo + "') ";
+			requete += "RETURNING * ";
+			
+			System.out.println(requete);
+			
+			rs = st.executeQuery(requete);
+			ResultSetMetaData rm = rs.getMetaData();
+
+			while(rs.next())
+			{
+				for(int i = 1 ; i <= rm.getColumnCount() ; i++)
+					s += (i != 1 ? ";" : "") + rs.getObject(i).toString();
+			}
+			
+			rs.close();
+			st.close();
+		} 
+		catch (SQLException e) 
+		{
+			return "ERREUR:Requête PSQL incorrecte";
+		}
+		
+		if(s.isEmpty())
+			s = "ERREUR:Compte inexistant";
+		else
+			s = "OK:" + s;
+		
+		return s;
+	}
+	
+	public static String connecterCompte(String req)
 	{
 		String s = "";
 		
@@ -119,7 +164,6 @@ public class BDConnexion
 
 			System.out.println(requete);
 			
-			String data = "";
 			while(rs.next())
 			{
 				for(int i = 1 ; i <= rm.getColumnCount() ; i++)
@@ -171,7 +215,6 @@ public class BDConnexion
 
 			System.out.println(requete);
 			
-			String data = "";
 			while(rs.next())
 			{
 				for(int i = 1 ; i <= rm.getColumnCount() ; i++)
@@ -214,7 +257,12 @@ public class BDConnexion
 		{
 			Statement st = connexion.createStatement();
 			
-			ResultSet rs = st.executeQuery("SELECT count(*) FROM theme");
+			String requete = "";
+			requete += "SELECT count(*) FROM theme ";
+			
+			ResultSet rs = st.executeQuery(requete);
+			System.out.println(requete);
+			
 			int nbThemes = 0;
 
 			while(rs.next())
@@ -243,9 +291,11 @@ public class BDConnexion
 
 			for(int j = 0 ; j < 3 ; j++)
 			{
-				String requete = "";
+				requete = "";
 				requete += "SELECT id_theme,nom_theme FROM theme ";
 				requete += "WHERE id_theme = " + themesAlea.get(j);
+
+				System.out.println(requete);
 
 				rs = st.executeQuery(requete);
 				ResultSetMetaData rm = rs.getMetaData();
@@ -285,7 +335,9 @@ public class BDConnexion
 			String requete = "";
 			requete += "SELECT id_question FROM question ";
 			requete += "WHERE id_theme = " + idTheme;
+			
 			ResultSet rs = st.executeQuery(requete);
+			System.out.println(requete);
 			
 
 			ArrayList<Integer> listeID = new ArrayList<Integer>();
@@ -330,6 +382,7 @@ public class BDConnexion
 				requete += "WHERE id_question = " + questAlea.get(j);
 
 				rs = st.executeQuery(requete);
+				System.out.println(requete);
 				ResultSetMetaData rm = rs.getMetaData();
 
 				while(rs.next())
@@ -411,8 +464,6 @@ public class BDConnexion
 			}
 
 
-
-
 			rs.close();
 			st.close();
 		} 
@@ -446,6 +497,8 @@ public class BDConnexion
 
 			
 			ResultSet rs = st.executeQuery(requete);
+			System.out.println(requete);
+
 			int nbPartiesEnCours = 0;
 
 			while(rs.next())
@@ -458,6 +511,8 @@ public class BDConnexion
 			requete += "WHERE id_compte = " + idJoueur;
 
 			rs = st.executeQuery(requete);
+			System.out.println(requete);
+
 			
 			String nomJoueur = null;
 			
@@ -478,6 +533,8 @@ public class BDConnexion
 			requete += "RETURNING id_partie,derniere_modif ";
 
 			rs = st.executeQuery(requete);
+			System.out.println(requete);
+
 			
 			rs.next();
 			int newPartieID = rs.getInt(1);
@@ -489,6 +546,8 @@ public class BDConnexion
 			requete += "RETURNING * ";
 			
 			rs = st.executeQuery(requete);
+			System.out.println(requete);
+
 
 			System.out.println("Nouvelle partie créée (id : " + newPartieID + ") le " + date);
 			
@@ -536,6 +595,8 @@ public class BDConnexion
 
 			
 			ResultSet rs = st.executeQuery(requete);
+			System.out.println(requete);
+
 			int nbMancheEnCours = 0;
 
 			while(rs.next())
@@ -548,6 +609,8 @@ public class BDConnexion
 			requete += "WHERE id_theme = " + idTheme;
 
 			rs = st.executeQuery(requete);
+			System.out.println(requete);
+
 			
 			String nomTheme = null;
 			
@@ -567,6 +630,8 @@ public class BDConnexion
 			requete += "RETURNING id_manche,num_manche,nom_theme,id_partie ";
 
 			rs = st.executeQuery(requete);
+			System.out.println(requete);
+
 			
 			rs.next();
 			int newMancheID = rs.getInt(1);
@@ -580,6 +645,8 @@ public class BDConnexion
 			requete += "RETURNING * ";
 			
 			rs = st.executeQuery(requete);
+			System.out.println(requete);
+
 
 			System.out.println("Nouvelle manche créée (id : " + newMancheID + "), questions : " + idQ1 + " " + idQ2 + " " + idQ3);
 			
