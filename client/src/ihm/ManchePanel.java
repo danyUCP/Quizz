@@ -16,15 +16,17 @@ import javax.swing.JScrollPane;
 
 import connection.Client;
 import data.Joueur;
+import data.Manche;
 import data.Partie;
 import data.Score;
+import data.Theme;
 
-public class PartiePanel extends JPanel
+public class ManchePanel extends JPanel
 {
 	private JScrollPane scroll;
-	private JPanel contenu, header;
-	private ArrayList<BoutonPartie> parties;
-	private BoutonGame retour;
+	private JPanel contenu, header, footer;
+	private ArrayList<LabelManche> manches;
+	private BoutonGame retour, commencer;
 	private LabelGame joueurLabel;
 
 	
@@ -34,11 +36,13 @@ public class PartiePanel extends JPanel
 	
 	private Client client;
 	private Joueur joueur;
+	private Partie partie;
 	
-	public PartiePanel(Joueur joueur, Client client)
+	public ManchePanel(Joueur joueur, Client client, Partie partie)
 	{
 		this.joueur = joueur;
 		this.client = client;
+		this.partie = partie;
 		
 		this.dim = new Dimension(largeur, hauteur);
 		this.setPreferredSize(dim);
@@ -64,11 +68,20 @@ public class PartiePanel extends JPanel
 		//scroll.setPreferredSize(new Dimension(largeur, hauteur - 40));
 		scroll.setMaximumSize(new Dimension(largeur, hauteur - 40));
 		this.add(scroll, BorderLayout.CENTER);
+		
+		//-------------- PARTIE FOOTER ------------------//
+		footer = new JPanel();
+		footer.setBackground(new Color(28, 28, 28));
+		footer.setPreferredSize(new Dimension(largeur, 40));
+		footer.setLayout(new FlowLayout());
+		commencer = new BoutonGame("Commencer");
+		footer.add(commencer);
+		this.add(footer, BorderLayout.SOUTH);
 	}
 	
 	public void initContenu()
 	{		
-		String reponse = client.envoyerInstruction("GET:infoParties " + joueur.getId());
+		String reponse = client.envoyerInstruction("GET:infoManches " + partie.getId());
 		
 		String donnees[] = reponse.split(":");
 		
@@ -78,38 +91,39 @@ public class PartiePanel extends JPanel
 		}
 		else if(donnees[0].equals("OK"))
 		{
-			parties = new ArrayList<BoutonPartie>();
+			manches = new ArrayList<LabelManche>();
 			
 			String donneesParties[] = donnees[1].split(";");
 			//JOptionPane.showMessageDialog(null, donneesParties.length);
 			
-			int nbPartie = donneesParties.length / 6;
+			int nbManche = donneesParties.length / 6;
 			
-			for(int i = 0 ; i < nbPartie * 6 ; i += 6)
+			for(int i = 0 ; i < nbManche * 6 ; i += 6)
 			{
-				int idPartie = Integer.parseInt(donneesParties[i]);
-				Joueur j1 = new Joueur(donneesParties[i + 1]);
-				Joueur j2 = new Joueur(donneesParties[i + 2]);
-				Score scorePartie = new Score(Integer.parseInt(donneesParties[i + 3]), Integer.parseInt(donneesParties[i + 4]));
-				int mancheActuelle = Integer.parseInt(donneesParties[i + 5]);
+				int idManche = Integer.parseInt(donneesParties[i]);
+				Joueur j1 = partie.getJ1();
+				Joueur j2 = partie.getJ2();
+				Theme theme = new Theme(donneesParties[i + 1]);
+				Score scoreManche = new Score(Integer.parseInt(donneesParties[i + 2]), Integer.parseInt(donneesParties[i + 3]));
+				int numManche = Integer.parseInt(donneesParties[i + 4]);
+				boolean estTerminee = Boolean.parseBoolean(donneesParties[i + 5]);
 				
 				if(j1.getPseudo().equals(""))
 					j1.setPseudo("Pas d'adversaire");
 				if(j2.getPseudo().equals(""))
 					j2.setPseudo("Pas d'adversaire");
 					
-				Partie p = new Partie(idPartie, j1, j2, scorePartie, mancheActuelle);
+				Manche m = new Manche(idManche, j1, j2, scoreManche, theme, numManche, estTerminee);
 				//System.out.println(p);
-				BoutonPartie b = new BoutonPartie(p);
-				b.addActionListener(new PartieListener());
-				parties.add(b);
+				LabelManche b = new LabelManche(m);
+				manches.add(b);
 			}
 			
-			contenu.setLayout(new GridLayout(10, 1));
-			contenu.setMaximumSize(new Dimension(largeur, 10 * 40));
+			contenu.setLayout(new GridLayout(6, 1));
+			contenu.setMaximumSize(new Dimension(largeur, 6 * 40));
 
-			for(int i = 0 ; i < parties.size() ; i++)
-				contenu.add(parties.get(i));
+			for(int i = 0 ; i < manches.size() ; i++)
+				contenu.add(manches.get(i));
 			
 			this.revalidate();
 
@@ -130,85 +144,46 @@ public class PartiePanel extends JPanel
 		
 	}
 	
-	private class BoutonPartie extends BoutonGame
+	private class LabelManche extends LabelGame
 	{
-		private Partie partie;
+		private Manche manche;
 
-		public BoutonPartie(Partie partie) 
+		public LabelManche(Manche manche) 
 		{
 			super("Partie");
 
-			this.partie = partie;
+			this.manche = manche;
 			this.setSize(300, 40);
-			this.setText(partie.getJ1() + " " + partie.getScorePartie() + " " + partie.getJ2());
+			this.setText("Manche " + manche.getNumeroManche() + " : " + manche.getTheme().getNom() + "         " + manche.getScoreManche());
 
 		}
 
-		public Partie getPartie() 
+		public Manche getManche() 
 		{
-			return partie;
+			return manche;
 		}
 
 
 		
 	}
 	
-	private class PartieListener implements ActionListener
+	private class MancheListener implements ActionListener
 	{
-
+		
 		public void actionPerformed(ActionEvent e) 
 		{
-			Partie partieChoisie = ((BoutonPartie)(e.getSource())).getPartie();
-
 			removeAll();
-			add(new ManchePanel(joueur, client, partieChoisie));
-			revalidate();
 			/*
-			String reponse = client.envoyerInstruction("GET:3QuestionsAlea " + themeChoisi.getId());
-			//JOptionPane.showMessageDialog(null, reponse);
-
-			String donnees[] = reponse.split(":");
-
-			if(donnees[0].equals("ERREUR"))
-			{
-				JOptionPane.showMessageDialog(null, donnees[1]);
-			}
-			else if(donnees[0].equals("OK"))
-			{
-				String donneesQ[] = donnees[1].split(";");
-
-				Question q1 = new Question(Integer.parseInt(donneesQ[0]), donneesQ[1], donneesQ[2], donneesQ[3], donneesQ[4], donneesQ[5]);
-				Question q2 = new Question(Integer.parseInt(donneesQ[6]), donneesQ[7], donneesQ[8], donneesQ[9], donneesQ[10], donneesQ[11]);
-				Question q3 = new Question(Integer.parseInt(donneesQ[12]), donneesQ[13], donneesQ[14], donneesQ[15], donneesQ[16], donneesQ[17]);
-
-				themeChoisi.ajouterQuestion(q1);
-				themeChoisi.ajouterQuestion(q2);
-				themeChoisi.ajouterQuestion(q3);
-
-				reponse = client.envoyerInstruction("SET:newManche " + idPartie + "/" + themeChoisi.getId() + "/" + q1.getId() + "/" + q2.getId() + "/" + q3.getId());
-
-				Manche m = new Manche(1, joueur, null, joueur, themeChoisi, 1);
-
-				removeAll();
-				add(new ManchePanel(joueur, client, idPartie, m));
-				revalidate();
-
-			 	*/
-				/*
-				removeAll();
-				
 			if(e.getSource() == nouvellePartie)
 				add(new PartiePanel(joueur, client));
 			else if(e.getSource() == continuerPartie)
 				add(new PartiePanel(joueur, client));
 			else if(e.getSource() == adversaireAlea)
 				add(new PartiePanel(joueur, client));
-				 
+			*/
 
-				revalidate();
-				repaint();	
-				
-			}*/
+			revalidate();
+			repaint();			
 		}
 	}
 
@@ -243,7 +218,7 @@ public class PartiePanel extends JPanel
 	{	
 		this.removeAll();
 		Fenetre.getGlobal().removeAll();
-		Fenetre.getGlobal().add(new GamePanel(joueur, client), BorderLayout.CENTER);
+		Fenetre.getGlobal().add(new PartiePanel(joueur, client), BorderLayout.CENTER);
 		Fenetre.getGlobal().revalidate();
 	}
 }

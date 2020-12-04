@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import connection.SocketClient;
+import connection.Client;
 import data.Joueur;
 
 public class GamePanel extends JPanel
@@ -29,10 +29,10 @@ public class GamePanel extends JPanel
 	private int largeur = 400;
 	private int hauteur = 600;
 	
-	private SocketClient client;
+	private Client client;
 	private Joueur joueur;
 	
-	public GamePanel(Joueur joueur, SocketClient client)
+	public GamePanel(Joueur joueur, Client client)
 	{
 		this.joueur = joueur;
 		this.client = client;
@@ -141,6 +141,8 @@ public class GamePanel extends JPanel
 	public void fermer()
 	{
 		Fenetre frame = (Fenetre) (SwingUtilities.getRoot(this));
+		
+		client.envoyerInstruction("DISCONNECT");
 		
 		this.removeAll();
 		frame.resetAccueil();

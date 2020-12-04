@@ -3,6 +3,8 @@ package test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import data.BDConnexion;
 import data.RequeteManager;
@@ -18,6 +20,7 @@ public class TestRequete {
 		
 		String req;
 		
+				
 		try 
 		{
 			do

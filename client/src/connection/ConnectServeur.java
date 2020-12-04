@@ -2,6 +2,6 @@ package connection;
 
 public class ConnectServeur 
 {
-	private SocketClient socket;
+	private Client socket;
 
 }

@@ -154,6 +154,58 @@ public class BDConnexion
 		return s;
 	}
 	
+	public static String getInfoManches(String idPartie)
+	{
+		String s = "";
+
+		try
+		{
+			Statement st = connexion.createStatement();
+
+			String requete = "";
+			requete += "SELECT id_manche,nom_theme,score_j1,score_j2,num_manche,est_terminee FROM manche ";
+			requete += "WHERE id_partie = " + idPartie + " ";
+
+			ResultSet rs = st.executeQuery(requete);
+			ResultSetMetaData rm = rs.getMetaData();
+
+			System.out.println(requete);
+			
+			String data = "";
+			while(rs.next())
+			{
+				for(int i = 1 ; i <= rm.getColumnCount() ; i++)
+				{
+					s += (i != 1 ? ";" : "");
+					
+					if(rs.getObject(i) != null)
+						s += rs.getObject(i).toString();
+					else
+						s += "";
+				}
+				
+				s += !rs.isLast() ? ";" : "";
+			}
+
+
+			rs.close();
+			st.close();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+
+			return "ERREUR:Requête PSQL incorrecte";
+		}
+		
+		if(s.isEmpty())
+			s = "ERREUR:Aucune manche en cours";
+		else
+			s = "OK:" + s;
+		
+		return s;
+	}
+	
 	public static String rechercheThemes()
 	{
 		String s = "";

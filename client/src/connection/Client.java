@@ -1,34 +1,31 @@
 package connection;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import data.Joueur;
-import data.Question;
-
-public class SocketClient
+public class Client
 {
-	private InetAddress ipServeur;
+	private InetAddress ip;
 	private int port;
 	private Socket socket;
 	
 	private BufferedReader entree;
 	private PrintWriter sortie;
 	
-	public SocketClient()
+	public Client()
 	{
 		try
 		{
+			LogClient log = new LogClient();
 			this.socket = new Socket("127.0.0.1", 2021);
-			this.ipServeur = socket.getInetAddress();
+			this.ip = socket.getInetAddress();
 			this.port = socket.getPort();
 						
 			this.entree = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
@@ -36,8 +33,21 @@ public class SocketClient
 			
 			System.out.println("Port de communication côté client : " + socket.getLocalPort());
 			System.out.println("Nom de l'hôte distant : " + socket.getRemoteSocketAddress());
+			LogClient.trace("Le client s'est connecté à : " + socket.getRemoteSocketAddress());
 			
 		} 
+		catch (ConnectException e)
+		{
+			String err = "LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE " + ip + "/" + port + " ! ";
+			System.err.println(err);
+			LogClient.trace(err);		
+		}
+		catch (SocketException e)
+		{
+			String err = "LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE " + ip + "/" + port + " ! ";
+			System.err.println(err);
+			LogClient.trace(err);		
+		}
 		catch (UnknownHostException e)
 		{
 			e.printStackTrace();
@@ -88,10 +98,17 @@ public class SocketClient
 
 			reponse = entree.readLine();
 			System.out.println("Reçu : " + reponse);
+			
+			if(reponse.equals("DISCONNECT"))
+			{
+				deconnecter();
+				return null;
+			}
 		} 
 		catch(SocketException e){
 			System.err.println("LA CONNEXION AU SERVEUR A ETE INTERROMPUE ! ");
 			reponse = "ERREUR:La connexion au serveur a été interrompue !";
+			deconnecter();
 		}
 		catch (IOException e) 
 		{
@@ -101,7 +118,10 @@ public class SocketClient
 		return reponse;
 	}
 	
-	
+	public boolean estDeconnecte()
+	{
+		return socket.isClosed();
+	}
 	
 	
 	public void deconnecter()

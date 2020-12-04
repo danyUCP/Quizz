@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import connection.SocketClient;
+import connection.Client;
 import data.Joueur;
 import data.Manche;
 import data.Question;
@@ -27,13 +27,13 @@ public class ChoixThemePanel extends JPanel
 	private int largeur = 400;
 	private int hauteur = 600;
 	
-	private SocketClient client;
+	private Client client;
 	private Joueur joueur;
 	private int idPartie;
 	
 	
 
-	public ChoixThemePanel(Joueur joueur, SocketClient client, int idPartie)
+	public ChoixThemePanel(Joueur joueur, Client client, int idPartie)
 	{
 		this.joueur = joueur;
 		this.client = client;

@@ -1,0 +1,78 @@
+04/12/2020 à 07:44:30 : Client /127.0.0.1 connecté
+
+04/12/2020 à 07:45:30 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 07:45:56 : Client /127.0.0.1 connecté
+
+04/12/2020 à 07:50:17 : Client /127.0.0.1 connecté
+
+04/12/2020 à 07:53:06 : Client /127.0.0.1 connecté
+
+04/12/2020 à 07:54:51 : Client /127.0.0.1 connecté
+
+04/12/2020 à 07:58:34 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:01:09 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:03:06 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:05:33 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:08:01 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:08:12 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 08:12:19 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:16:46 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:23:35 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:23:43 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:27:21 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:47:23 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 08:49:45 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:51:06 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 08:54:40 : Client /127.0.0.1 connecté
+
+04/12/2020 à 08:55:05 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 09:12:31 : Client /127.0.0.1 connecté
+
+04/12/2020 à 09:13:55 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 09:14:10 : Client /127.0.0.1 connecté
+
+04/12/2020 à 09:18:40 : Client /127.0.0.1 connecté
+
+04/12/2020 à 09:21:48 : Client /127.0.0.1 connecté
+
+04/12/2020 à 10:04:11 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 10:05:35 : Client /127.0.0.1 connecté
+
+04/12/2020 à 10:05:47 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 10:10:10 : Client /127.0.0.1 connecté
+
+04/12/2020 à 10:10:17 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 10:11:33 : Client /127.0.0.1 connecté
+
+04/12/2020 à 10:11:53 : Client /127.0.0.1 connecté
+
+04/12/2020 à 10:12:25 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 10:12:52 : Client /127.0.0.1 connecté
+
+04/12/2020 à 10:12:59 : LA CONNEXION A ETE INTERROMPUE ! 
+
+04/12/2020 à 10:14:14 : Client /127.0.0.1 connecté
+
+04/12/2020 à 10:14:39 : LA CONNEXION A ETE INTERROMPUE ! 
+

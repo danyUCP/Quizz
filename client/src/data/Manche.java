@@ -13,6 +13,7 @@ public class Manche
 	private Joueur prims;
 	private int id;
 	private int numeroManche;
+	private boolean estTerminee;
 	
 	public Manche(Joueur j1, Joueur j2, Joueur prims, String nomTheme)
 	{
@@ -55,6 +56,21 @@ public class Manche
 		
 		this.scoreManche = new Score(0, 0);
 		this.numeroManche = numeroManche;
+	}
+	
+	public Manche(int id, Joueur j1, Joueur j2, Score scoreManche, Theme theme, int numeroManche, boolean estTerminee)
+	{
+		this.theme = theme;
+		
+		this.j1 = j1;
+		this.j2 = j2;
+		
+		this.reponsesJ1 = new ArrayList<Integer>();
+		this.reponsesJ2 = new ArrayList<Integer>();
+		
+		this.scoreManche = scoreManche;
+		this.numeroManche = numeroManche;
+		this.estTerminee = estTerminee;
 	}
 	
 	public void ajouterQuestion(Question q)
@@ -109,6 +125,27 @@ public class Manche
 	}
 
 	
+
+	
+	public int getNumeroManche() 
+	{
+		return numeroManche;
+	}
+
+	public void setNumeroManche(int numeroManche) 
+	{
+		this.numeroManche = numeroManche;
+	}
+
+	public boolean estTerminee() 
+	{
+		return estTerminee;
+	}
+
+	public void setEstTerminee(boolean estTerminee) 
+	{
+		this.estTerminee = estTerminee;
+	}
 
 	public Theme getTheme() 
 	{

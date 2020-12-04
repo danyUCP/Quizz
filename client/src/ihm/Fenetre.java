@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import connection.SocketClient;
+import connection.Client;
 import data.Joueur;
 
 public class Fenetre extends JFrame
@@ -36,7 +36,7 @@ public class Fenetre extends JFrame
 	private int largeur = 400;
 	private int hauteur = 600;
 	
-	private SocketClient client;
+	private Client client;
 	
 	
 	public Fenetre()
@@ -182,8 +182,8 @@ public class Fenetre extends JFrame
 		public void actionPerformed(ActionEvent e) 
 		{
 			//global.removeAll();
-			if(client == null)
-				client = new SocketClient();
+			if(client == null || client.estDeconnecte())
+				client = new Client();
 
 			if(e.getSource() == connecter)
 			{

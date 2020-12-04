@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.BindException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -24,14 +25,37 @@ public class Serveur
 	private RequeteManager reqManager;
 	
 	
-	public Serveur()
+	public Serveur(int port)
 	{
 		try
 		{
-			this.socketServeur = new ServerSocket(2021);
+			LogServeur log = new LogServeur();
+			this.port = port;
+				
+			this.socketServeur = new ServerSocket(port);
 			this.ipServeur = InetAddress.getLocalHost();
-			this.port = socketServeur.getLocalPort();
-		} 
+			this.demarrer();
+		}
+		catch (BindException e)
+		{
+			String err = "LE SERVEUR N'A PAS PU SE LANCER SUR LE PORT " + port + " ! ";
+			System.err.println(err);
+			LogServeur.trace(err);
+			try 
+			{
+				this.port = 2021;
+				this.socketServeur = new ServerSocket(port);
+				this.ipServeur = InetAddress.getLocalHost();
+				this.demarrer();
+
+			} 
+			catch (IOException e1) 
+			{
+				String err2 = "IMPOSSIBLE DE DEMARRER LE SERVEUR SUR LE PORT PAR DEFAUT. MERCI DE PRECISER UN PORT DIFFERENT";
+				System.err.println(err2);
+				LogServeur.trace(err2);
+			}
+		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
@@ -47,6 +71,7 @@ public class Serveur
 
 			this.socketClient = socketServeur.accept();
 			System.out.println("Client " + socketClient.getInetAddress() + " connecté");
+			LogServeur.trace("Client " + socketClient.getInetAddress() + " connecté");
 
 			this.entree = new BufferedReader(new InputStreamReader(this.socketClient.getInputStream()));
 			this.sortie = new PrintWriter(this.socketClient.getOutputStream());
@@ -84,14 +109,30 @@ public class Serveur
 				System.out.println("Envoi de : " + reponse);
 				sortie.println(reponse);
 				sortie.flush();
+				
+				if(reponse.equals("DISCONNECT"))
+				{
+					closeClient();
+					demarrer();
+					break;
+				}
 			}
-			catch(SocketException e){
-				System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
+			catch(SocketException e)
+			{
+				String err = "LA CONNEXION A ETE INTERROMPUE ! ";
+				System.err.println(err);
+				LogServeur.trace(err);
+				closeClient();
+				demarrer();
 				break;
 			}
 			catch (NullPointerException e) 
 			{
-				System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
+				String err = "LA CONNEXION A ETE INTERROMPUE ! ";
+				System.err.println(err);
+				LogServeur.trace(err);
+				closeClient();
+				demarrer();
 				break;
 			}	
 			catch (IOException e) 
@@ -100,12 +141,31 @@ public class Serveur
 				break;
 			}	
 
-		}while(!instruction.equals("DISCONNECT") || !this.socketClient.isClosed());
+		}while(!instruction.equals("DISCONNECT") || this.socketClient.isClosed());
 
 		
-		
+		this.deconnecter();
 	}
 	
+	public void closeClient()
+	{
+		try 
+		{
+			this.entree.close();
+			this.sortie.close();
+			
+			if(this.socketClient != null)
+			{
+				this.socketClient.close();
+			}
+			System.out.println("\nClient réinitialisé");
+
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public void deconnecter()

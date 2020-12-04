@@ -4,17 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import connection.SocketClient;
+import connection.Client;
 
 public class TestSocket 
 {
 	public static void main(String[] args) 
 	{
 		
-		SocketClient socket = new SocketClient();
+		Client socket = new Client();
 		
 		BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in)) ;
-		String instruction = null;
+		String instruction = null, reponse = null;
 		
 		do
 		{
@@ -23,13 +23,13 @@ public class TestSocket
 				System.out.print("\nTapez instruction : ");
 				instruction = clavier.readLine();
 
-				socket.envoyerInstruction(instruction);
+				reponse = socket.envoyerInstruction(instruction);
 			} 
 			catch (IOException e) 
 			{
 				e.printStackTrace();
 			}
-		}while(instruction != null);
+		}while(reponse != null);
 		
 		
 		socket.deconnecter();
