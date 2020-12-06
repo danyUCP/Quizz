@@ -160,3 +160,21 @@
 
 04/12/2020 à 10:28:31 : Le client s'est connecté à : /127.0.0.1:2021
 
+06/12/2020 à 07:45:19 : Le client s'est connecté à : /127.0.0.1:2021
+
+06/12/2020 à 09:13:36 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE null/0 ! 
+
+06/12/2020 à 09:18:07 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE null/0 ! 
+
+06/12/2020 à 09:19:40 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+06/12/2020 à 09:20:14 : Le client s'est connecté à : /127.0.0.1:2021
+
+06/12/2020 à 09:20:44 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+06/12/2020 à 09:22:56 : Le client s'est connecté à : /127.0.0.1:2018
+
+06/12/2020 à 09:23:40 : Le client s'est connecté à : /127.0.0.1:2020
+
+06/12/2020 à 09:25:39 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/80 ! 
+

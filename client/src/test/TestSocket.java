@@ -10,6 +10,8 @@ public class TestSocket
 {
 	public static void main(String[] args) 
 	{
+		if(args.length == 1)
+			Client.setPort(Integer.parseInt(args[0]));
 		
 		Client socket = new Client();
 		

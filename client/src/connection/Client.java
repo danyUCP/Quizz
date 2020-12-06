@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 public class Client
 {
 	private InetAddress ip;
-	private int port;
+	private static Integer port;
 	private Socket socket;
 	
 	private BufferedReader entree;
@@ -24,9 +24,11 @@ public class Client
 		try
 		{
 			LogClient log = new LogClient();
-			this.socket = new Socket("127.0.0.1", 2021);
-			this.ip = socket.getInetAddress();
-			this.port = socket.getPort();
+			if(port == null)
+				port = 2021;
+			this.ip = InetAddress.getByName("127.0.0.1");
+			this.socket = new Socket(ip, port);
+			
 						
 			this.entree = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			this.sortie = new PrintWriter(this.socket.getOutputStream());
@@ -125,6 +127,20 @@ public class Client
 	}
 	
 	
+	
+	
+	public static Integer getPort() 
+	{
+		return port;
+	}
+
+
+	public static void setPort(Integer port) 
+	{
+		Client.port = port;
+	}
+
+
 	public void deconnecter()
 	{
 		try 

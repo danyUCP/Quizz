@@ -272,3 +272,13 @@
 
 04/12/2020 à 10:49:47 : LA CONNEXION A ETE INTERROMPUE ! 
 
+06/12/2020 à 07:45:19 : Client /127.0.0.1 connecté
+
+06/12/2020 à 09:20:14 : Client /127.0.0.1 connecté
+
+06/12/2020 à 09:20:28 : LA CONNEXION A ETE INTERROMPUE ! 
+
+06/12/2020 à 09:22:56 : Client /127.0.0.1 connecté
+
+06/12/2020 à 09:23:40 : Client /127.0.0.1 connecté
+
