@@ -61,31 +61,6 @@ public class Client
 	}
 	
 	
-	public void envoyerRequete(String requete)
-	{
-		String reponse = null;
-		
-		do
-		{
-			try
-			{	
-				sortie.println(requete);
-				System.out.println("Envoi : " + requete);
-				sortie.flush();
-
-				reponse = entree.readLine();
-				System.out.println("Reçu : " + reponse);
-			} 
-			catch(SocketException e){
-				System.err.println("LA CONNEXION AU SERVEUR A ETE INTERROMPUE ! ");
-				break;
-			}
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
-		}while(requete != null);
-	}
 	
 	public String envoyerInstruction(String instruction)
 	{
@@ -107,15 +82,22 @@ public class Client
 				return null;
 			}
 		} 
-		catch(SocketException e){
-			System.err.println("LA CONNEXION AU SERVEUR A ETE INTERROMPUE ! ");
+		catch(SocketException e)
+		{
+			String err = "LA CONNEXION AU SERVEUR A ETE INTERROMPUE ! ";
+			System.err.println(err);
+			LogClient.trace(err);		
+
 			reponse = "ERREUR:La connexion au serveur a été interrompue !";
 			deconnecter();
 			
 		}
 		catch(NullPointerException e)
 		{
-			System.err.println("AUCUNE CONNEXION AVEC LE SERVEUR DETECTEE ! ");
+			String err = "AUCUNE CONNEXION AVEC LE SERVEUR DETECTEE ! ";
+			System.err.println(err);
+			LogClient.trace(err);		
+			
 			reponse = "ERREUR:Aucune connexion avec le serveur detectée !";
 			deconnecter();
 			

@@ -56,9 +56,16 @@ public class RequeteManager
 		String prefixe = donnees[0].toUpperCase();
 		String reponse = "";
 
-		
-		if(!listeCommandes.contains(prefixe))
-			reponse = "La commande " + prefixe + " n'existe pas";
+		if(requete.length() > 40)
+		{
+			reponse = "ERREUR:L'instruction dépasse la taille autorisée";
+			LogServeur.trace("Dépassement de buffer : " + requete);
+		}
+		else if(!listeCommandes.contains(prefixe))
+		{
+			reponse = "ERREUR:La commande " + prefixe + " n'existe pas";
+			LogServeur.trace("Instruction inconnue par le serveur : " + requete);
+		}
 		else
 		{
 			System.out.println("Commande " + prefixe + " reconnue");
