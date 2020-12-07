@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
 import connection.Client;
 import data.Joueur;
@@ -73,6 +74,8 @@ public class PartiePanel extends JPanel
 		if(donnees[0].equals("ERREUR"))
 		{
 			JOptionPane.showMessageDialog(null, donnees[1]);
+			if(donnees[1].contentEquals("La connexion au serveur a été interrompue !") || donnees[1].equals("Aucune connexion avec le serveur detectée !"))
+				fermer();
 		}
 		else if(donnees[0].equals("OK"))
 		{
@@ -177,5 +180,16 @@ public class PartiePanel extends JPanel
 		Fenetre.getGlobal().removeAll();
 		Fenetre.getGlobal().add(new GamePanel(joueur, client), BorderLayout.CENTER);
 		Fenetre.getGlobal().revalidate();
+	}
+	
+	public void fermer()
+	{
+		Fenetre frame = (Fenetre) (SwingUtilities.getRoot(Fenetre.getGlobal()));
+		
+		if(!client.estDeconnecte())
+			client.envoyerInstruction("DISCONNECT");
+		
+		this.removeAll();
+		frame.resetAccueil();
 	}
 }

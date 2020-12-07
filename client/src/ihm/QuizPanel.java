@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import connection.Client;
 import data.Joueur;
@@ -153,4 +154,14 @@ public class QuizPanel extends JPanel
 		Fenetre.getGlobal().revalidate();
 	}
 
+	public void fermer()
+	{
+		Fenetre frame = (Fenetre) (SwingUtilities.getRoot(this));
+		
+		if(!client.estDeconnecte())
+			client.envoyerInstruction("DISCONNECT");
+		
+		this.removeAll();
+		frame.resetAccueil();
+	}
 }

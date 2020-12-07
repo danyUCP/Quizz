@@ -178,3 +178,77 @@
 
 06/12/2020 à 09:25:39 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/80 ! 
 
+07/12/2020 à 05:25:53 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 05:29:45 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 05:31:39 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 05:32:00 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 05:35:31 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 05:36:00 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 05:40:18 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 05:42:17 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 05:50:48 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 05:54:11 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 05:55:30 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 05:56:37 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:00:57 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 06:03:24 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 06:03:29 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 06:03:39 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 06:03:53 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 06:05:16 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:07:45 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:08:38 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:09:09 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:11:38 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:13:00 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:13:28 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 06:13:51 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 06:13:59 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:14:02 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:15:54 : LE CLIENT N'A PAS PU SE CONNECTER A L'ADRESSE /127.0.0.1/2021 ! 
+
+07/12/2020 à 06:17:12 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:21:12 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:21:48 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:25:03 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:29:29 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:31:57 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:37:17 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:39:42 : Le client s'est connecté à : /127.0.0.1:2021
+
+07/12/2020 à 06:40:15 : Le client s'est connecté à : /127.0.0.1:2021
+

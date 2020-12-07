@@ -172,8 +172,10 @@ public class Fenetre extends JFrame
 		
 		connecter.addActionListener(new BoutonListener());
 		creer.addActionListener(new BoutonListener());
-
+		
+		
 		this.revalidate();
+		this.repaint();
 	}
 
 

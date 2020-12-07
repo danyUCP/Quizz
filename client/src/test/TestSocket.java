@@ -23,7 +23,7 @@ public class TestSocket
 			try 
 			{
 				System.out.print("\nTapez instruction : ");
-				instruction = clavier.readLine();
+				instruction = clavier.readLine(); 
 
 				reponse = socket.envoyerInstruction(instruction);
 			} 
@@ -31,10 +31,10 @@ public class TestSocket
 			{
 				e.printStackTrace();
 			}
-		}while(reponse != null);
+		}while(reponse != null && !socket.estDeconnecte());
 		
 		
-		socket.deconnecter();
+		//socket.deconnecter();
 		
 		
 		

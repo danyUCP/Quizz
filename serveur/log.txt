@@ -282,3 +282,59 @@
 
 06/12/2020 à 09:23:40 : Client /127.0.0.1 connecté
 
+07/12/2020 à 05:25:53 : Client /127.0.0.1 connecté
+
+07/12/2020 à 05:29:45 : Client /127.0.0.1 connecté
+
+07/12/2020 à 05:31:39 : Client /127.0.0.1 connecté
+
+07/12/2020 à 05:35:31 : Client /127.0.0.1 connecté
+
+07/12/2020 à 05:42:17 : Client /127.0.0.1 connecté
+
+07/12/2020 à 05:50:48 : Client /127.0.0.1 connecté
+
+07/12/2020 à 05:54:11 : Client /127.0.0.1 connecté
+
+07/12/2020 à 05:55:30 : Client /127.0.0.1 connecté
+
+07/12/2020 à 05:56:37 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:05:16 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:07:45 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:08:38 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:09:09 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:10:59 : LE SERVEUR N'A PAS PU SE LANCER SUR LE PORT 2021 ! 
+
+07/12/2020 à 06:10:59 : IMPOSSIBLE DE DEMARRER LE SERVEUR SUR LE PORT PAR DEFAUT. MERCI DE PRECISER UN PORT DIFFERENT
+
+07/12/2020 à 06:11:38 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:13:00 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:13:59 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:17:12 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:21:12 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:21:48 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:25:03 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:29:29 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:31:57 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:37:17 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:39:42 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:40:15 : Client /127.0.0.1 connecté
+
+07/12/2020 à 06:40:21 : LA CONNEXION A ETE INTERROMPUE ! 
+

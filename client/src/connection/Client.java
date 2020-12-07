@@ -113,6 +113,13 @@ public class Client
 			deconnecter();
 			
 		}
+		catch(NullPointerException e)
+		{
+			System.err.println("AUCUNE CONNEXION AVEC LE SERVEUR DETECTEE ! ");
+			reponse = "ERREUR:Aucune connexion avec le serveur detectée !";
+			deconnecter();
+			
+		}
 		catch (IOException e) 
 		{
 			e.printStackTrace();
@@ -123,6 +130,9 @@ public class Client
 	
 	public boolean estDeconnecte()
 	{
+		if(socket == null)
+			return true;
+		
 		return socket.isClosed();
 	}
 	
@@ -145,10 +155,15 @@ public class Client
 	{
 		try 
 		{
-			this.entree.close();
-			this.sortie.close();
+			if(entree != null)
+				this.entree.close();
+			
+			if(sortie != null)
+				this.sortie.close();
 
-			this.socket.close();
+			if(socket != null)
+				this.socket.close();
+			
 			System.out.println("Client déconnecté");
 		} 
 		catch (IOException e) 

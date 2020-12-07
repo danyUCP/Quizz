@@ -93,6 +93,8 @@ public class GamePanel extends JPanel
 				if(donnees[0].equals("ERREUR"))
 				{
 					JOptionPane.showMessageDialog(null, donnees[1]);
+					if(donnees[1].contentEquals("La connexion au serveur a été interrompue !") || donnees[1].equals("Aucune connexion avec le serveur detectée !"))
+						fermer();
 				}
 				else if(donnees[0].equals("OK"))
 				{
@@ -112,6 +114,8 @@ public class GamePanel extends JPanel
 				if(donnees[0].equals("ERREUR"))
 				{
 					JOptionPane.showMessageDialog(null, donnees[1]);
+					if(donnees[1].contentEquals("La connexion au serveur a été interrompue !") || donnees[1].equals("Aucune connexion avec le serveur detectée !"))
+						fermer();
 				}
 				else if(donnees[0].equals("OK"))
 				{
@@ -166,9 +170,10 @@ public class GamePanel extends JPanel
 	
 	public void fermer()
 	{
-		Fenetre frame = (Fenetre) (SwingUtilities.getRoot(this));
+		Fenetre frame = (Fenetre) (SwingUtilities.getRoot(Fenetre.getGlobal()));
 		
-		client.envoyerInstruction("DISCONNECT");
+		if(!client.estDeconnecte())
+			client.envoyerInstruction("DISCONNECT");
 		
 		this.removeAll();
 		frame.resetAccueil();
